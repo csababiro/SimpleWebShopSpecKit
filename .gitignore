@@ -42,6 +42,7 @@ next-env.d.ts
 
 # IDE and tooling
 .cursor/
+!/.cursor/commands/
 scratchpad/
 *.log
 
