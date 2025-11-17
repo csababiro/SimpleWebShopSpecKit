@@ -10,13 +10,14 @@ import type { Product } from "@/types/product";
 import { Suspense } from "react";
 
 type HomePageProps = {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
-  };
+  }>;
 };
 
 export default async function Home({ searchParams }: HomePageProps) {
-  const selectedCategoryId = searchParams.category || null;
+  const resolvedSearchParams = await searchParams;
+  const selectedCategoryId = resolvedSearchParams.category || null;
 
   // Fetch data
   let products: Product[] = [];

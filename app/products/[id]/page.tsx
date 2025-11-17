@@ -7,13 +7,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 type ProductDetailPageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { id } = params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
 
   // Fetch product and category
   let product = null;
