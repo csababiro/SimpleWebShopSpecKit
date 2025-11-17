@@ -38,12 +38,12 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T007 Create product service layer for fetching products in lib/services/product-service.ts
-- [ ] T008 Create category service layer for fetching categories in lib/services/category-service.ts
-- [ ] T009 Create utility function to compute product availability from stock in lib/utils/product-utils.ts
-- [ ] T010 Create EmptyState component in components/EmptyState.tsx
-- [ ] T011 Create LoadingState component in components/LoadingState.tsx
-- [ ] T012 Create ErrorState component in components/ErrorState.tsx
+- [x] T007 Create product service layer for fetching products in lib/services/product-service.ts
+- [x] T008 Create category service layer for fetching categories in lib/services/category-service.ts
+- [x] T009 Create utility function to compute product availability from stock in lib/utils/product-utils.ts
+- [x] T010 Create EmptyState component in components/EmptyState.tsx
+- [x] T011 Create LoadingState component in components/LoadingState.tsx
+- [x] T012 Create ErrorState component in components/ErrorState.tsx
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
