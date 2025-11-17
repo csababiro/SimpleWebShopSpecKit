@@ -36,7 +36,8 @@ GET /products
 Query Parameters:
   - limit (optional, number): Maximum number of products to return (default: 100)
   - offset (optional, number): Number of products to skip (default: 0)
-  - category (optional, string): Filter by category (future)
+  - category (optional, string): Filter by category ID
+  - inStock (optional, boolean): Filter by stock availability (true = only in stock, false = all)
 ```
 
 **Response** (200 OK):
@@ -49,6 +50,8 @@ Query Parameters:
       "description": "Durable canvas backpack...",
       "price": 79,
       "imageUrl": "https://...",
+      "category": "category-1",
+      "stock": 15,
       "availability": "in_stock"
     }
   ],
@@ -77,6 +80,8 @@ GET /products/product-1
   "description": "Durable canvas backpack...",
   "price": 79,
   "imageUrl": "https://...",
+  "category": "category-1",
+  "stock": 15,
   "availability": "in_stock"
 }
 ```
@@ -85,9 +90,31 @@ GET /products/product-1
 - 404 Not Found: Product not found
 - 500 Internal Server Error: Server error
 
+### GET /categories
+
+Retrieve list of all product categories.
+
+**Request**:
+```
+GET /categories
+```
+
+**Response** (200 OK):
+```json
+{
+  "data": [
+    {
+      "id": "category-1",
+      "name": "Electronics",
+      "description": "Electronic devices and accessories"
+    }
+  ]
+}
+```
+
 ### POST /cart/items (Future)
 
-Add item to cart (requires authentication in future).
+Add item to cart (requires authentication in future). Validates stock availability.
 
 **Request**:
 ```json
@@ -106,6 +133,11 @@ Add item to cart (requires authentication in future).
   "createdAt": "2025-01-27T10:00:00Z"
 }
 ```
+
+**Error Responses**:
+- 400 Bad Request: Quantity exceeds available stock
+- 404 Not Found: Product not found
+- 409 Conflict: Product out of stock
 
 ### GET /cart (Future)
 
@@ -135,19 +167,27 @@ Get current user's cart (requires authentication).
 ### Product Contract
 
 ```typescript
+interface CategoryResponse {
+  id: string;
+  name: string;
+  description?: string;
+}
+
 interface ProductResponse {
   id: string;
   name: string;
   description: string;
   price: number;
   imageUrl: string;
-  availability?: "in_stock" | "out_of_stock" | "pre_order";
+  category: string; // Category ID
+  stock: number; // Number of items available
+  availability?: "in_stock" | "low_stock" | "out_of_stock"; // Computed from stock
 }
 ```
 
 ### Cart Item Contract
 
-```typescript
+```typescript@
 interface CartItemResponse {
   id: string;
   productId: string;

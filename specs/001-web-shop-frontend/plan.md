@@ -7,7 +7,7 @@
 
 ## Summary
 
-Build a frontend-only web shop using Next.js 16 App Router that allows users to browse products, view product details, and manage a shopping cart. Product data will be mocked using Supabase client libraries for future backend integration. The implementation follows component-first architecture with TypeScript strict typing, server components by default, and client components only for interactive features.
+Build a frontend-only web shop using Next.js 16 App Router that allows users to browse products with category filtering, view product details with stock information, and manage a shopping cart with stock validation. Products include categories and stock counts. Users can filter by category and see stock availability. Cart validates stock when adding/updating items. Product data will be mocked using Supabase client libraries for future backend integration. The implementation follows component-first architecture with TypeScript strict typing, server components by default, and client components only for interactive features.
 
 ## Technical Context
 
@@ -19,7 +19,7 @@ Build a frontend-only web shop using Next.js 16 App Router that allows users to 
 **Project Type**: Web application (frontend-only)  
 **Performance Goals**: Page load < 2 seconds, cart updates < 500ms, support 100+ products without performance degradation  
 **Constraints**: Frontend-only implementation, no backend API required, must work offline for cart operations, responsive design (320px - 1920px)  
-**Scale/Scope**: MVP with 3 user stories (browse products, view details, cart management), ~10-20 products initially, single-page application with routing
+**Scale/Scope**: MVP with 3 user stories (browse products with categories, view details with stock, cart management with stock validation), ~10-20 products across multiple categories initially, single-page application with routing
 
 ## Constitution Check
 
@@ -94,9 +94,11 @@ components/
 ├── ProductCard.tsx             # Product card component (server)
 ├── ProductList.tsx             # Product grid/list container (server)
 ├── ProductDetail.tsx           # Product detail view (server)
+├── CategoryFilter.tsx          # Category filter component (client)
+├── StockIndicator.tsx          # Stock availability indicator (server)
 ├── CartSheet.tsx               # Cart sidebar/drawer (client)
 ├── CartItem.tsx                # Individual cart item (client)
-├── AddToCartButton.tsx         # Add to cart button (client)
+├── AddToCartButton.tsx         # Add to cart button (client, validates stock)
 ├── EmptyState.tsx              # Empty state component (server)
 ├── LoadingState.tsx            # Loading spinner/skeleton (server)
 ├── ErrorState.tsx              # Error message component (server)
@@ -113,10 +115,12 @@ lib/
     └── client.ts               # Supabase client setup (mocked)
 
 types/
-└── product.ts                  # Product type definitions (existing)
+├── product.ts                  # Product and Category type definitions (to be updated)
+└── cart.ts                     # Cart type definitions (to be created)
 
 data/
-└── products.json               # Mock product data (existing)
+├── products.json               # Mock product data (to be updated with category and stock)
+└── categories.json             # Mock category data (to be created)
 
 __tests__/                      # Test files (to be created)
 ├── components/
