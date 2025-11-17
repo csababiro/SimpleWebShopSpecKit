@@ -57,15 +57,15 @@
 
 ### Implementation for User Story 1
 
-- [ ] T013 [P] [US1] Create StockIndicator component in components/StockIndicator.tsx
-- [ ] T014 [P] [US1] Create CategoryFilter component in components/CategoryFilter.tsx
-- [ ] T015 [US1] Update ProductCard component to display category and stock in components/ProductCard.tsx
-- [ ] T016 [US1] Create ProductList component for product grid layout in components/ProductList.tsx
-- [ ] T017 [US1] Update homepage to use ProductList and CategoryFilter in app/page.tsx
-- [ ] T018 [US1] Implement category filtering logic in app/page.tsx
-- [ ] T019 [US1] Add empty state handling for no products in app/page.tsx
-- [ ] T020 [US1] Add loading state handling for product data fetching in app/page.tsx
-- [ ] T021 [US1] Add error state handling for product data fetching failures in app/page.tsx
+- [x] T013 [P] [US1] Create StockIndicator component in components/StockIndicator.tsx
+- [x] T014 [P] [US1] Create CategoryFilter component in components/CategoryFilter.tsx
+- [x] T015 [US1] Update ProductCard component to display category and stock in components/ProductCard.tsx
+- [x] T016 [US1] Create ProductList component for product grid layout in components/ProductList.tsx
+- [x] T017 [US1] Update homepage to use ProductList and CategoryFilter in app/page.tsx
+- [x] T018 [US1] Implement category filtering logic in app/page.tsx
+- [x] T019 [US1] Add empty state handling for no products in app/page.tsx
+- [x] T020 [US1] Add loading state handling for product data fetching in app/page.tsx
+- [x] T021 [US1] Add error state handling for product data fetching failures in app/page.tsx
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently - users can browse products, see categories and stock, and filter by category
 
