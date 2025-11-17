@@ -123,16 +123,16 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T044 [P] Add responsive design improvements for mobile devices across all components
-- [ ] T045 [P] Add accessibility improvements (ARIA labels, keyboard navigation) across all components
-- [ ] T046 [P] Add visual indicators for low stock (< 5 items) in components/StockIndicator.tsx
-- [ ] T047 [P] Optimize product images loading with Next.js Image component in components/ProductCard.tsx
-- [ ] T048 [P] Optimize product images loading with Next.js Image component in components/ProductDetail.tsx
-- [ ] T049 Add category navigation breadcrumbs in components/ProductDetail.tsx
-- [ ] T050 Add "View products in this category" link in components/ProductDetail.tsx
-- [ ] T051 Update Header component to show cart count badge in components/Header.tsx
-- [ ] T052 Add cart icon button to Header component in components/Header.tsx
-- [ ] T053 Run quickstart.md validation checklist
+- [x] T044 [P] Add responsive design improvements for mobile devices across all components
+- [x] T045 [P] Add accessibility improvements (ARIA labels, keyboard navigation) across all components
+- [x] T046 [P] Add visual indicators for low stock (< 5 items) in components/StockIndicator.tsx
+- [x] T047 [P] Optimize product images loading with Next.js Image component in components/ProductCard.tsx
+- [x] T048 [P] Optimize product images loading with Next.js Image component in components/ProductDetail.tsx
+- [x] T049 Add category navigation breadcrumbs in components/ProductDetail.tsx
+- [x] T050 Add "View products in this category" link in components/ProductDetail.tsx
+- [x] T051 Update Header component to show cart count badge in components/Header.tsx
+- [x] T052 Add cart icon button to Header component in components/Header.tsx
+- [x] T053 Run quickstart.md validation checklist
 
 ---
 

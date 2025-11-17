@@ -35,11 +35,13 @@ export function CategoryFilter({
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2" role="group" aria-label="Filter products by category">
       <Button
         variant={selectedCategory === null ? "default" : "outline"}
         onClick={() => handleCategoryChange(null)}
         className="text-sm"
+        aria-pressed={selectedCategory === null}
+        aria-label="Show all products"
       >
         All Products
       </Button>
@@ -49,6 +51,8 @@ export function CategoryFilter({
           variant={selectedCategory === category.id ? "default" : "outline"}
           onClick={() => handleCategoryChange(category.id)}
           className="text-sm"
+          aria-pressed={selectedCategory === category.id}
+          aria-label={`Filter by ${category.name} category`}
         >
           {category.name}
         </Button>

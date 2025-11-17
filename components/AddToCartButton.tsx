@@ -59,11 +59,13 @@ export function AddToCartButton({
         className={className}
         onClick={handleAddToCart}
         disabled={outOfStock || isAdding}
+        aria-label={outOfStock ? `${product.name} is out of stock` : `Add ${product.name} to cart`}
+        aria-busy={isAdding}
       >
         {isAdding ? "Adding..." : outOfStock ? "Out of Stock" : "Add to Cart"}
       </Button>
       {error && (
-        <p className="text-sm text-red-600" role="alert">
+        <p className="text-sm text-red-600" role="alert" aria-live="polite">
           {error}
         </p>
       )}

@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Category, Product } from "@/types/product";
 import Image from "next/image";
@@ -30,6 +29,32 @@ export function ProductDetail({ product, category }: ProductDetailProps) {
 
       {/* Product Information */}
       <div className="flex flex-col space-y-6">
+        {/* Breadcrumbs */}
+        {category && (
+          <nav aria-label="Breadcrumb" className="text-sm">
+            <ol className="flex items-center gap-2 text-neutral-500">
+              <li>
+                <Link href="/" className="hover:text-neutral-900 hover:underline">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link
+                  href={`/?category=${category.id}`}
+                  className="hover:text-neutral-900 hover:underline"
+                >
+                  {category.name}
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-neutral-900" aria-current="page">
+                {product.name}
+              </li>
+            </ol>
+          </nav>
+        )}
+
         <div>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
             {product.name}
@@ -38,7 +63,8 @@ export function ProductDetail({ product, category }: ProductDetailProps) {
             <div className="mt-2">
               <Link
                 href={`/?category=${category.id}`}
-                className="text-sm text-neutral-500 hover:text-neutral-900 hover:underline"
+                className="text-sm text-neutral-500 hover:text-neutral-900 hover:underline focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 rounded"
+                aria-label={`View all products in ${category.name} category`}
               >
                 {category.name}
               </Link>
