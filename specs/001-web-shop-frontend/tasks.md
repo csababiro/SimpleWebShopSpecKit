@@ -101,19 +101,19 @@
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Update cart store to validate stock when adding items in lib/cart-store.ts
-- [ ] T032 [US3] Add updateQuantity method to cart store in lib/cart-store.ts
-- [ ] T033 [US3] Add stock validation to updateQuantity method in lib/cart-store.ts
-- [ ] T034 [US3] Add cart persistence to localStorage in lib/cart-store.ts
-- [ ] T035 [US3] Create AddToCartButton component with stock validation in components/AddToCartButton.tsx
-- [ ] T036 [US3] Update CartItem component to display stock warnings in components/CartItem.tsx
-- [ ] T037 [US3] Update CartItem component to allow quantity updates in components/CartItem.tsx
-- [ ] T038 [US3] Add stock validation to quantity updates in CartItem in components/CartItem.tsx
-- [ ] T039 [US3] Update CartSheet to show stock warnings for out of stock items in components/CartSheet.tsx
-- [ ] T040 [US3] Add empty cart state to CartSheet in components/CartSheet.tsx
-- [ ] T041 [US3] Integrate AddToCartButton into ProductDetail component in components/ProductDetail.tsx
-- [ ] T042 [US3] Disable AddToCartButton for products with zero stock in components/AddToCartButton.tsx
-- [ ] T043 [US3] Display error message when attempting to exceed stock limit in components/AddToCartButton.tsx
+- [x] T031 [US3] Update cart store to validate stock when adding items in lib/cart-store.ts
+- [x] T032 [US3] Add updateQuantity method to cart store in lib/cart-store.ts
+- [x] T033 [US3] Add stock validation to updateQuantity method in lib/cart-store.ts
+- [x] T034 [US3] Add cart persistence to localStorage in lib/cart-store.ts
+- [x] T035 [US3] Create AddToCartButton component with stock validation in components/AddToCartButton.tsx
+- [x] T036 [US3] Update CartItem component to display stock warnings in components/CartItem.tsx
+- [x] T037 [US3] Update CartItem component to allow quantity updates in components/CartItem.tsx
+- [x] T038 [US3] Add stock validation to quantity updates in CartItem in components/CartItem.tsx
+- [x] T039 [US3] Update CartSheet to show stock warnings for out of stock items in components/CartSheet.tsx
+- [x] T040 [US3] Add empty cart state to CartSheet in components/CartSheet.tsx
+- [x] T041 [US3] Integrate AddToCartButton into ProductDetail component in components/ProductDetail.tsx
+- [x] T042 [US3] Disable AddToCartButton for products with zero stock in components/AddToCartButton.tsx
+- [x] T043 [US3] Display error message when attempting to exceed stock limit in components/AddToCartButton.tsx
 
 **Checkpoint**: At this point, all user stories should work independently - users can browse products, view details, and manage cart with stock validation
 

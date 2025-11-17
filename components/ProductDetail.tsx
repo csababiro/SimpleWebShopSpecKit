@@ -2,12 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCartStore } from "@/lib/cart-store";
-import { isOutOfStock } from "@/lib/utils/product-utils";
 import type { Category, Product } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
 import { StockIndicator } from "./StockIndicator";
+import { AddToCartButton } from "./AddToCartButton";
 
 type ProductDetailProps = {
   product: Product;
@@ -15,8 +14,6 @@ type ProductDetailProps = {
 };
 
 export function ProductDetail({ product, category }: ProductDetailProps) {
-  const addItem = useCartStore((state) => state.addItem);
-  const outOfStock = isOutOfStock(product);
 
   return (
     <div className="grid gap-8 md:grid-cols-2">
@@ -67,14 +64,11 @@ export function ProductDetail({ product, category }: ProductDetailProps) {
         </Card>
 
         <div className="flex gap-4">
-          <Button
+          <AddToCartButton
+            product={product}
             size="lg"
             className="flex-1"
-            onClick={() => addItem(product)}
-            disabled={outOfStock}
-          >
-            {outOfStock ? "Out of Stock" : "Add to Cart"}
-          </Button>
+          />
         </div>
 
         {category && (

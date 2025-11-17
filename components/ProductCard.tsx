@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,11 +8,10 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { useCartStore } from "@/lib/cart-store";
-import { isOutOfStock } from "@/lib/utils/product-utils";
 import { type Product, type Category } from "@/types/product";
 import Link from "next/link";
 import { StockIndicator } from "./StockIndicator";
+import { AddToCartButton } from "./AddToCartButton";
 
 type ProductCardProps = {
   product: Product;
@@ -21,8 +19,6 @@ type ProductCardProps = {
 };
 
 export function ProductCard({ product, category }: ProductCardProps) {
-  const addItem = useCartStore((state) => state.addItem);
-  const outOfStock = isOutOfStock(product);
 
   return (
     <Card className="flex h-full flex-col overflow-hidden">
@@ -54,13 +50,10 @@ export function ProductCard({ product, category }: ProductCardProps) {
         ${product.price.toFixed(2)}
       </CardContent>
       <CardFooter>
-        <Button
+        <AddToCartButton
+          product={product}
           className="w-full"
-          onClick={() => addItem(product)}
-          disabled={outOfStock}
-        >
-          {outOfStock ? "Out of Stock" : "Add to Cart"}
-        </Button>
+        />
       </CardFooter>
     </Card>
   );
