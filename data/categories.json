@@ -1,0 +1,23 @@
+[
+  {
+    "id": "electronics",
+    "name": "Electronics",
+    "description": "Electronic devices and accessories"
+  },
+  {
+    "id": "accessories",
+    "name": "Accessories",
+    "description": "Fashion and lifestyle accessories"
+  },
+  {
+    "id": "home",
+    "name": "Home & Living",
+    "description": "Home decor and living essentials"
+  },
+  {
+    "id": "fitness",
+    "name": "Fitness & Sports",
+    "description": "Fitness equipment and sports gear"
+  }
+]
+

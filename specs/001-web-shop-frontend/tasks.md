@@ -23,12 +23,12 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 [P] Update Product type definition with category and stock fields in types/product.ts
-- [ ] T002 [P] Create Category type definition in types/product.ts
-- [ ] T003 [P] Create Cart type definitions in types/cart.ts
-- [ ] T004 [P] Create categories.json mock data file in data/categories.json
-- [ ] T005 [P] Update products.json with category and stock fields in data/products.json
-- [ ] T006 [P] Create Supabase client mock implementation in lib/supabase/client.ts
+- [x] T001 [P] Update Product type definition with category and stock fields in types/product.ts
+- [x] T002 [P] Create Category type definition in types/product.ts
+- [x] T003 [P] Create Cart type definitions in types/cart.ts
+- [x] T004 [P] Create categories.json mock data file in data/categories.json
+- [x] T005 [P] Update products.json with category and stock fields in data/products.json
+- [x] T006 [P] Create Supabase client mock implementation in lib/supabase/client.ts
 
 ---
 
