@@ -1,0 +1,185 @@
+# Multi-Agent System for Cursor
+
+## Agent Invocation Policy (Deterministic)
+
+- Agents run **only** when the user explicitly tags them:
+  `@orchestrator  @planner  @executor  @quality  @verifier  @doc`
+- **Do not** infer an agent from intent, keywords, or phrasing.
+- If no explicit tag is present, respond exactly with:
+  `Awaiting explicit @agent tag.`
+
+## Context Attachment (agent-specific)
+
+Each agent loads only the context files it needs:
+
+### @orchestrator Context
+
+- `@scratchpad/state.md` — workflow state
+- `@scratchpad/plan.md` — current plan
+- `@scratchpad/tasks.md` — task breakdown
+- `@scratchpad/errors.jsonl` — error log
+- `@scratchpad/logs.md` — activity log
+- `@.cursor/rules/agents/orchestrator.mdc` — orchestrator rules
+
+### @planner Context
+
+- `@scratchpad/state.md` — workflow state
+- `@scratchpad/docs/sources.json` — package versions
+- `@.cursor/rules/agents/planner.mdc` — planner rules
+
+### @executor Context
+
+- `@scratchpad/state.md` — workflow state
+- `@scratchpad/tasks.md` — task breakdown
+- `@.cursor/rules/agents/executor.mdc` — executor rules
+
+### @quality Context
+
+- `@scratchpad/tasks.md` — task breakdown
+- `@scratchpad/plan.md` — current plan
+- Latest executor patch (unified diff)
+- `@.cursor/rules/agents/quality.mdc` — quality rules
+
+### @verifier Context
+
+- `@scratchpad/tasks.md` — task breakdown
+- `@scratchpad/plan.md` — current plan
+- Latest executor patch (unified diff)
+- `@.cursor/rules/agents/verifier.mdc` — verifier rules
+
+### @doc Context
+
+- `@scratchpad/plan.md` — current plan
+- `@scratchpad/tasks.md` — task breakdown
+- `@scratchpad/docs/**` — documentation snapshots
+- `@scratchpad/metrics/**` — quality metrics
+- `@scratchpad/logs.md` — activity log
+- `@.cursor/rules/agents/doc.mdc` — doc rules
+
+### @orchestrator Behavior
+
+When user types "@orchestrator" (explicit tag only):
+
+1. **Respond as Orchestrator agent** following `.cursor/rules/agents/orchestrator.mdc`
+2. **Show workflow strategy** in format: `🎯 WORKFLOW: phase=<phase> | agent=<self> | progress=<done>/<total>`
+3. **Route to appropriate agent** (usually planner for new requests)
+
+### @planner Behavior
+
+When user types "@planner" or orchestrator routes to planner:
+
+1. **Respond as Planner agent** following `.cursor/rules/agents/planner.mdc`
+2. **Create actual plans** in scratchpad/plan.md
+3. **Create actual tasks** in scratchpad/tasks.md
+
+### @executor Behavior
+
+When user types "@executor" or references specific tasks:
+
+1. **Respond as Executor agent** following `.cursor/rules/agents/executor.mdc`
+2. **Provide implementation guidance** using CMD+K/CMD+I
+3. **Reference actual tasks** from scratchpad/tasks.md
+
+### @quality Behavior
+
+When user types "@quality" (explicit tag only):
+
+1. **Respond as Quality agent** following `.cursor/rules/agents/quality.mdc`
+2. **Provide structured JSON scores** for tasks
+
+### @verifier Behavior
+
+When user types "@verifier" or verification needed:
+
+1. **Respond as Verifier agent** following `.cursor/rules/agents/verifier.mdc`
+2. **Check against DoD** and domain rules
+
+### @doc Behavior
+
+When user types "@doc" or documentation needed:
+
+1. **Respond as Doc agent** following `.cursor/rules/agents/doc.mdc`
+2. **Generate useful documentation** for implemented features
+
+## MCP Usage Policy (Global)
+
+### Context7 MCP
+
+- **Allowed only during planning phase** by the planner agent
+- **Must pin package@version** from `scratchpad/docs/sources.json`
+- **Must save snapshots** with front matter under `scratchpad/docs/<pkg>/<version>/<slug>.md`
+- **No re-fetching** allowed in later phases - use snapshots only
+- **All other agents**: Do not call Context7 MCP
+
+### Memory Bank MCP (Optional)
+
+- **Allowed for all agents** when configured
+- **Use namespaces**: `mem://<project>/decisions/<request_id>.json`
+- **Orchestrator mirrors** keys in `scratchpad/decisions.md` for audit
+- **No restrictions** on when it can be used
+
+### MCP Restrictions by Agent
+
+- **orchestrator**: No MCP tools (manages workflow only)
+- **planner**: Context7 + Memory Bank (planning phase only for Context7)
+- **executor**: Memory Bank only (no Context7)
+- **quality**: Memory Bank only (no Context7)
+- **verifier**: Memory Bank only (no Context7)
+- **doc**: Memory Bank only (no Context7)
+
+## Domain Rules Integration
+
+Always reference appropriate domain rules:
+
+- React projects: `@.cursor/rules/react.mdc`
+- Angular projects: `@.cursor/rules/angular.mdc`
+- Node.js projects: `@.cursor/rules/backend-node.mdc`
+- Architecture: `@.cursor/rules/architecture.mdc`
+- Global rules: `@.cursor/rules/global.mdc`
+
+## File Structure
+
+### Generated Files (scratchpad/)
+
+- `plan.md` - Current plan and acceptance criteria
+- `tasks.md` - Task breakdown with dependencies
+- `state.md` - Workflow state
+- `logs.md` - Execution logs
+
+## Integration with Cursor
+
+### Native Features
+
+- **CMD+K**: Quick edits (use for individual tasks)
+- **CMD+I**: Multi-file changes (use for complex tasks)
+- **@-mentions**: Free context loading
+
+### Workflow
+
+1. Type request in chat
+2. System detects multi-agent request
+3. Orchestrator kicks in automatically
+4. Sequential pipeline executes (one agent at a time)
+5. Check scratchpad/ for results
+
+## Examples
+
+### Build a Feature
+
+```
+User: "Add user authentication"
+System: 🎯 WORKFLOW: phase=planning | agent=orchestrator | progress=0/0
+System: [Routes to planner agent]
+```
+
+### Manual Agent Invocation
+
+```
+User: "@executor Implement TASK-2"
+System: ⚡ STRATEGY: new_feature | Context: @scratchpad/tasks.md | ~150 tokens
+System: [Provides implementation guidance]
+```
+
+## That's It!
+
+The system is **fully functional** and **works directly from Cursor chat**. No complex setup, no manual orchestration - just type your request and the multi-agent system handles everything.
